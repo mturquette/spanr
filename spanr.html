@@ -6,9 +6,10 @@
 
 		<meta name="color:Sidebar" content="#ffffff" />
 		<meta name="color:Background" content="#ffffff" />
-		<meta name="color:Links" content="#666666" />
+		<meta name="color:Text" content="#000000" />
+		<meta name="color:Links" content="#0000ff" />
 		<meta name="color:LinksHover" content="#000000" />
-		<meta name="color:SidebarLinks" content="#333333" />
+		<meta name="color:SidebarLinks" content="#0000ff" />
 		<meta name="color:Description" content="#333333" />
 		<meta name="color:Following" content="#222222" />
 		<meta name="color:FollowingHover" content="#808080" />
@@ -26,7 +27,7 @@
 			body {
 				background-color: {color:Background};
 				font: 12px 'Lucida Grande', Gill Sans MT, sans-serif;
-				color: #333;
+				color: {color:Text};
 				margin: 0;
 			}
 
@@ -69,8 +70,7 @@
 			div#container {
 				padding: 10px;
 				margin-bottom: 3em;
-				width: 500px;
-				margin-left: 470px;
+				width: 730px;
 			}
 
 			#post {
@@ -84,7 +84,7 @@
 				line-height: 24px;
 				letter-spacing: -1px;
 				margin-left: 0px;
-				font-weight: normal;
+				font-weight: bold;
 			}
 
 			div.entry-type {
@@ -96,13 +96,16 @@
 
 			div.entry-content {
 				margin-bottom: 1.5em;
-				margin-left: 0px;
+				margin-left: 24px;
 			}
 
 			.link-title {
 				font-size: 22px;
 				line-height: 24px;
 				letter-spacing: -1px;
+				text-decoration: underline;
+				margin-left: -24px;
+				font-weight: bold;
 			}
 
 			.cite {
@@ -235,9 +238,9 @@
 			}
 
 			#left {
-				width: 235px;
+				width: 254px;
 				padding: 10px;
-				margin-left: 215px;
+				right: 0px;
 				position: absolute;
 				line-height: 15px;
 				background-color: {color:Sidebar};
@@ -266,7 +269,7 @@
 			#left h4 {
 				font-size: 13px;
 				letter-spacing: -1px;
-				color: {color:SidebarLinks};
+				color: {color:Text};
 			}
 
 			#left h4 a {
@@ -275,7 +278,8 @@
 			}
 
 			#left h4 a:hover {
-				color: {color:SidebarLinks};
+				color: {color:LinksHover};
+				border-bottom: 1px solid #eee
 			}
 
 			#left ul{
@@ -380,6 +384,24 @@
 				overflow: auto;
 			}
 
+			.blockout {
+				color: {color:Background};
+				background-color: {color:Text};
+				padding: 2px 4px;
+			}
+
+			.blockout-link {
+				color: {color:Background};
+				background-color: {color:Links};
+				padding: 2x 4px;
+				text-decoration: underline;
+			}
+
+			#header {
+				border-bottom: 1px solid {color:PostBorder};
+				line-height: 120%;
+			}
+
 			/* Custom CSS */
 			{CustomCSS}
 		</style>
@@ -387,7 +409,6 @@
 	<body>
 		<div id="wrap">
 			<div id="left">
-				<h1>{Title}</h1>
 				<div id="menu">
 					<ul>
 						<li><a href="/">Home</a></li>
@@ -426,6 +447,11 @@
 			</div>
 
 			<div id="container">
+				<div id="header">
+					<h1><span class="blockout">{Title}</span></h1>
+					<h2><span class="blockout">The technical blog of Mike Turquette</span></h2>
+				</div>
+				<br /><br />
 				{block:SearchPage}
 				<div id="searchresultcount">
 					<p>Your search for <span class="query"><b>{SearchQuery}</b></span> yielded {SearchResultCount} result(s).</p>
@@ -435,7 +461,7 @@
 
 				{block:Text}
 				<div id="post">
-					{block:Title}<h2 class="entry-title">{Title}</h2>{/block:Title}
+					{block:Title}<h2 class="entry-title"><span class="blockout">{Title}</span></h2>{/block:Title}
 					<div class="entry-type">
 
 					</div>
@@ -464,7 +490,7 @@
 			{block:Link}
 			<div id="post">
 				<div class="entry-type"></div>
-				<div class="entry-content"><p><a href="{URL}" class="link-title" {Target}>&#187; {Name}</a><p>{block:Description} 	{Description} {/block:Description}</p>
+				<div class="entry-content"><p><a href="{URL}" class="link-title" {Target}><span class="blockout-link">{Name}</span></a><p>{block:Description} 	{Description} {/block:Description}</p>
 					<br /><br />{block:RebloggedFrom}<span class="small">Reblogged from <a href="{ReblogParentURL}">{ReblogParentTitle}</a>.</span>{/block:RebloggedFrom}
 					{block:HasTags}<div class="tags">Tags: {block:Tags}<a href="{TagURL}" class="tag">{Tag}</a>{/block:Tags}</div>{/block:HasTags}
 					<p align="right" class="small">{Month} {DayOfMonthWithZero}, {Year}, {12Hour}:{Minutes}{AmPm}&nbsp; <a href="{Permalink}#disqus_thread">Comments</a></p>
