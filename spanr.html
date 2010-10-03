@@ -390,6 +390,12 @@
 				padding: 2px 4px;
 			}
 
+			a.blockout {
+				color: {color:Background};
+				background-color: {color:Text};
+				padding: 2px 4px;
+			}
+
 			.blockout-link {
 				color: {color:Background};
 				background-color: {color:Links};
@@ -461,13 +467,30 @@
 
 				{block:Text}
 				<div id="post">
-					{block:Title}<h2 class="entry-title"><span class="blockout">{Title}</span></h2>{/block:Title}
-					<div class="entry-type">
-
-					</div>
-					<div class="entry-content"><p>{Body}</p>
-						<br /><br />{block:RebloggedFrom}<span class="small">Reblogged from <a href="{ReblogParentURL}">{ReblogParentTitle}</a>.</span>{/block:RebloggedFrom}
-						{block:HasTags}<div class="tags">Tags: {block:Tags}<a href="{TagURL}" class="tag">{Tag}</a>{/block:Tags}</div>{/block:HasTags}
+					{block:Title}
+					<a href="{Permalink}">
+						<h2 class="entry-title">
+							<span class="blockout">
+								{Title}
+							</span>
+						</h2>
+					</a>
+					{/block:Title}
+					<div class="entry-type"></div>
+					<div class="entry-content">
+						<p>{Body}</p>
+						<br />
+						<br />
+						{block:RebloggedFrom}
+						<span class="small">
+							Reblogged from <a href="{ReblogParentURL}">{ReblogParentTitle}</a>.
+						</span>
+						{/block:RebloggedFrom}
+						{block:HasTags}
+						<div class="tags">
+							Tags: {block:Tags}<a href="{TagURL}" class="tag">{Tag}</a>{/block:Tags}
+						</div>
+						{/block:HasTags}
 						<p align="right" class="small">{Month} {DayOfMonthWithZero}, {Year}, {12Hour}:{Minutes}{AmPm} &nbsp; <a href="{Permalink}#disqus_thread">Comments</a></p>
 					</div>
 				</div>
@@ -476,80 +499,106 @@
 				{block:Photo}
 				<div id="post">
 					<div class="entry-type"></div>
-					<div class="entry-content"><p>{LinkOpenTag}<img src="{PhotoURL-500}" class="photo" alt="{PhotoAlt}" /></a></p>{LinkCloseTag}<p>
-					{block:Caption}
-					{Caption}
-					{/block:Caption}
-					<br /><br />{block:RebloggedFrom}<span class="small">Reblogged from <a href="{ReblogParentURL}">{ReblogParentTitle}</a>.</span>{/block:RebloggedFrom}
-					{block:HasTags}<div class="tags">Tags: {block:Tags}<a href="{TagURL}" class="tag">{Tag}</a>{/block:Tags}</div>{/block:HasTags}
-					<p align="right" class="small">{Month} {DayOfMonthWithZero}, {Year}, {12Hour}:{Minutes}{AmPm}&nbsp; <a href="{Permalink}#disqus_thread">Comments</a></p>
-				</div>
-			</div>
-			{/block:Photo}
+					<div class="entry-content">
+						<p>{LinkOpenTag}<img src="{PhotoURL-500}" class="photo" alt="{PhotoAlt}" />{LinkCloseTag}</p>
 
-			{block:Link}
-			<div id="post">
-				<div class="entry-type"></div>
-				<div class="entry-content"><p><a href="{URL}" class="link-title" {Target}><span class="blockout-link">{Name}</span></a><p>{block:Description} 	{Description} {/block:Description}</p>
-					<br /><br />{block:RebloggedFrom}<span class="small">Reblogged from <a href="{ReblogParentURL}">{ReblogParentTitle}</a>.</span>{/block:RebloggedFrom}
-					{block:HasTags}<div class="tags">Tags: {block:Tags}<a href="{TagURL}" class="tag">{Tag}</a>{/block:Tags}</div>{/block:HasTags}
-					<p align="right" class="small">{Month} {DayOfMonthWithZero}, {Year}, {12Hour}:{Minutes}{AmPm}&nbsp; <a href="{Permalink}#disqus_thread">Comments</a></p>
-				</div>
-			</div>
-			{/block:Link}
+						{block:Caption}
+						{Caption}
+						{/block:Caption}
 
-			{block:Video}
-			<div id="post">
-				<div class="entry-type"></div>
-				<div class="entry-content"><p>{Video-500}<p>{block:Caption} {Caption} {/block:Caption}
-					<br /><br />{block:RebloggedFrom}<span class="small">Reblogged from <a href="{ReblogParentURL}">{ReblogParentTitle}</a>.</span>{/block:RebloggedFrom}
-					{block:HasTags}<div class="tags">Tags: {block:Tags}<a href="{TagURL}" class="tag">{Tag}</a>{/block:Tags}</div>{/block:HasTags}
-					<p align="right" class="small">{Month} {DayOfMonthWithZero}, {Year}, {12Hour}:{Minutes}{AmPm}&nbsp; <a href="{Permalink}#disqus_thread">Comments</a></p>
-				</div>
-			</div>
-			{/block:Video}
+						<br /><br />
 
-			{block:Quote}
-			<div id="post" class="quotation">
-				<div class="entry-type"></div>
-				<div class="entry-content"><blockquote>&ldquo;{Quote}&rdquo;</blockquote><p class="cite">{block:Source}&mdash; {Source}{/block:Source}</p>
-					<br /><br />{block:RebloggedFrom}<span class="small">Reblogged from <a href="{ReblogParentURL}">{ReblogParentTitle}</a>.</span>{/block:RebloggedFrom}
-					{block:HasTags}<div class="tags">Tags: {block:Tags}<a href="{TagURL}" class="tag">{Tag}</a>{/block:Tags}</div>{/block:HasTags}
-					<p align="right" class="small">{Month} {DayOfMonthWithZero}, {Year}, {12Hour}:{Minutes}{AmPm}&nbsp; <a href="{Permalink}#disqus_thread">Comments</a></p>
-				</div>
-			</div>
-			{/block:Quote}
+						{block:RebloggedFrom}
+						<span class="small">Reblogged from <a href="{ReblogParentURL}">{ReblogParentTitle}</a>.</span>
+						{/block:RebloggedFrom}
 
-			{block:Audio}
-			<div id="post">
-				<div class="entry-type"></div>
-				<div class="entry-content"><p>{AudioPlayerBlack}<p>{block:ExternalAudio}<a href="{ExternalAudioURL}">Download</a>{/block:ExternalAudio}</p>{block:Caption}{Caption}{/block:Caption}
-					<br /><br />
-					<span class="small">Played {FormattedPlayCount} time(s).</span>
-					<br /><br />{block:RebloggedFrom}<span class="small">Reblogged from <a href="{ReblogParentURL}">{ReblogParentTitle}</a>.</span>{/block:RebloggedFrom}
-					{block:HasTags}<div class="tags">Tags: {block:Tags}<a href="{TagURL}" class="tag">{Tag}</a>{/block:Tags}</div>{/block:HasTags}
-					<p align="right" class="small">{Month} {DayOfMonthWithZero}, {Year}, {12Hour}:{Minutes}{AmPm}&nbsp; <a href="{Permalink}#disqus_thread">Comments</a></p>
-				</div>
-			</div>
-			{/block:Audio}
+						{block:HasTags}
+						<div class="tags">Tags: {block:Tags}<a href="{TagURL}" class="tag">{Tag}</a>{/block:Tags}</div>
+						{/block:HasTags}
 
-			{block:Chat}
-			<div id="post" class="chat">
-				{block:Title}<h2 class="entry-title">{Title}</h2>{/block:Title}
-				<div class="entry-type"></div>
-				<div class="entry-content"><ul>
-						{block:Lines}
-						<li class="{Alt}">{block:Label}<span class="label">{Label}</span>{/block:Label}&nbsp;{Line}</li>
-						{/block:Lines}
-					</ul>
-					<br /><br />{block:RebloggedFrom}<span class="small">Reblogged from <a href="{ReblogParentURL}">{ReblogParentTitle}</a>.</span>{/block:RebloggedFrom}
-					{block:HasTags}<div class="tags">Tags: {block:Tags}<a href="{TagURL}" class="tag">{Tag}</a>{/block:Tags}</div>{/block:HasTags}
-					<p align="right" class="small">{Month} {DayOfMonthWithZero}, {Year}, {12Hour}:{Minutes}{AmPm}&nbsp; <a href="{Permalink}#disqus_thread">Comments</a></p>
+						<p align="right" class="small">{Month} {DayOfMonthWithZero}, {Year}, {12Hour}:{Minutes}{AmPm}&nbsp; <a href="{Permalink}#disqus_thread">Comments</a></p>
+					</div>
 				</div>
-			</div>
-			{/block:Chat}
-			{block:PostNotes}{PostNotes}{/block:PostNotes}
-			{/block:Posts}
+				{/block:Photo}
+
+				{block:Link}
+				<div id="post">
+					<div class="entry-type"></div>
+					<div class="entry-content">
+						<p><a href="{URL}" class="link-title" {Target}><span class="blockout-link">{Name}</span></a></p>
+
+						{block:Description}
+						{Description}
+						{/block:Description}
+
+						<br /><br />
+
+						{block:RebloggedFrom}
+						<span class="small">Reblogged from <a href="{ReblogParentURL}">{ReblogParentTitle}</a>.</span>
+						{/block:RebloggedFrom}
+
+						{block:HasTags}
+						<div class="tags">Tags: {block:Tags}<a href="{TagURL}" class="tag">{Tag}</a>{/block:Tags}</div>
+						{/block:HasTags}
+						<p align="right" class="small">{Month} {DayOfMonthWithZero}, {Year}, {12Hour}:{Minutes}{AmPm}&nbsp; <a href="{Permalink}#disqus_thread">Comments</a></p>
+					</div>
+				</div>
+				{/block:Link}
+
+				{block:Video}
+				<div id="post">
+					<div class="entry-type"></div>
+					<div class="entry-content"><p>{Video-500}<p>{block:Caption} {Caption} {/block:Caption}
+						<br /><br />
+						{block:RebloggedFrom}<span class="small">Reblogged from <a href="{ReblogParentURL}">{ReblogParentTitle}</a>.</span>{/block:RebloggedFrom}
+						{block:HasTags}<div class="tags">Tags: {block:Tags}<a href="{TagURL}" class="tag">{Tag}</a>{/block:Tags}</div>{/block:HasTags}
+						<p align="right" class="small">{Month} {DayOfMonthWithZero}, {Year}, {12Hour}:{Minutes}{AmPm}&nbsp; <a href="{Permalink}#disqus_thread">Comments</a></p>
+					</div>
+				</div>
+				{/block:Video}
+
+				{block:Quote}
+				<div id="post" class="quotation">
+					<div class="entry-type"></div>
+					<div class="entry-content"><blockquote>&ldquo;{Quote}&rdquo;</blockquote><p class="cite">{block:Source}&mdash; {Source}{/block:Source}</p>
+						<br /><br />{block:RebloggedFrom}<span class="small">Reblogged from <a href="{ReblogParentURL}">{ReblogParentTitle}</a>.</span>{/block:RebloggedFrom}
+						{block:HasTags}<div class="tags">Tags: {block:Tags}<a href="{TagURL}" class="tag">{Tag}</a>{/block:Tags}</div>{/block:HasTags}
+						<p align="right" class="small">{Month} {DayOfMonthWithZero}, {Year}, {12Hour}:{Minutes}{AmPm}&nbsp; <a href="{Permalink}#disqus_thread">Comments</a></p>
+					</div>
+				</div>
+				{/block:Quote}
+
+				{block:Audio}
+				<div id="post">
+					<div class="entry-type"></div>
+					<div class="entry-content"><p>{AudioPlayerBlack}<p>{block:ExternalAudio}<a href="{ExternalAudioURL}">Download</a>{/block:ExternalAudio}</p>{block:Caption}{Caption}{/block:Caption}
+						<br /><br />
+						<span class="small">Played {FormattedPlayCount} time(s).</span>
+						<br /><br />{block:RebloggedFrom}<span class="small">Reblogged from <a href="{ReblogParentURL}">{ReblogParentTitle}</a>.</span>{/block:RebloggedFrom}
+						{block:HasTags}<div class="tags">Tags: {block:Tags}<a href="{TagURL}" class="tag">{Tag}</a>{/block:Tags}</div>{/block:HasTags}
+						<p align="right" class="small">{Month} {DayOfMonthWithZero}, {Year}, {12Hour}:{Minutes}{AmPm}&nbsp; <a href="{Permalink}#disqus_thread">Comments</a></p>
+					</div>
+				</div>
+				{/block:Audio}
+
+				{block:Chat}
+				<div id="post" class="chat">
+					{block:Title}<h2 class="entry-title">{Title}</h2>{/block:Title}
+					<div class="entry-type"></div>
+					<div class="entry-content"><ul>
+							{block:Lines}
+							<li class="{Alt}">{block:Label}<span class="label">{Label}</span>{/block:Label}&nbsp;{Line}</li>
+							{/block:Lines}
+						</ul>
+						<br /><br />{block:RebloggedFrom}<span class="small">Reblogged from <a href="{ReblogParentURL}">{ReblogParentTitle}</a>.</span>{/block:RebloggedFrom}
+						{block:HasTags}<div class="tags">Tags: {block:Tags}<a href="{TagURL}" class="tag">{Tag}</a>{/block:Tags}</div>{/block:HasTags}
+						<p align="right" class="small">{Month} {DayOfMonthWithZero}, {Year}, {12Hour}:{Minutes}{AmPm}&nbsp; <a href="{Permalink}#disqus_thread">Comments</a></p>
+					</div>
+				</div>
+				{/block:Chat}
+				{block:PostNotes}{PostNotes}{/block:PostNotes}
+				{/block:Posts}
+		</div>
 			<script type="text/javascript">var disqus_url = "{Permalink}"; var disqus_title ="{block:PostTitle}{PostTitle}{/block:PostTitle}";</script>
 			<div id="disqus_thread"></div><script charset="utf-8" type="text/javascript" src="http://disqus.com/forums/instrumentation/embed.js"></script>
 			{/block:Permalink}
